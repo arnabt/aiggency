@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const animatedElements = document.querySelectorAll(
     '.section-label, .section-title, .section-subtitle, ' +
     '.problem-card, .driver-card, .approach-card, ' +
-    '.capability-card, .result-card, .fit-card, .team-card, ' +
+    '.capability-card, .result-card, .fit-card, .team-card, .stat-card, .news-card, ' +
     '.about-title, .about-line, .about-body, ' +
     '.cta-title, .cta-subtitle, ' +
     '.badge, .hero-title, .hero-subtitle, .hero-buttons, ' +
@@ -68,7 +68,7 @@ function createHeroNetwork() {
   canvas.style.height = '100%';
   canvas.style.pointerEvents = 'none';
   canvas.style.opacity = '0.25';
-  
+
   const hero = document.getElementById('hero');
   if (!hero) return;
   hero.insertBefore(canvas, hero.firstChild);
