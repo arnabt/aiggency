@@ -78,6 +78,14 @@ a {
   font-size: 1.1rem;
   letter-spacing: -0.02em;
   color: var(--text-primary);
+  display: flex;
+  align-items: center;
+}
+
+.logo-img {
+  height: 48px;
+  width: auto;
+  object-fit: contain;
 }
 
 .nav-links {
@@ -957,6 +965,15 @@ a {
 .footer-logo {
   font-weight: 700;
   font-size: 0.9375rem;
+  display: flex;
+  align-items: center;
+}
+
+.logo-img-footer {
+  height: 32px;
+  width: auto;
+  object-fit: contain;
+  opacity: 0.8;
 }
 
 .footer-copy {
