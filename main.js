@@ -44,8 +44,18 @@ document.addEventListener('DOMContentLoaded', () => {
   // Smooth scroll for navigation links
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
+      // Don't smooth scroll for modal trigger buttons which use href="#"
+      if (this.id === 'header-contact-btn' || this.id === 'cta-contact-btn') {
+        return;
+      }
+
       e.preventDefault();
-      const target = document.querySelector(this.getAttribute('href'));
+      const href = this.getAttribute('href');
+
+      // Prevent querySelector error for empty hash links
+      if (href === '#') return;
+
+      const target = document.querySelector(href);
       if (target) {
         const headerHeight = header.offsetHeight;
         const targetPosition = target.getBoundingClientRect().top + window.scrollY - headerHeight;
@@ -56,6 +66,52 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   });
+
+  // ===== Contact Modal Logic =====
+  const modal = document.getElementById('contact-modal');
+  const modalCloseBtn = document.querySelector('.modal-close');
+  const contactButtons = [
+    document.getElementById('header-contact-btn'),
+    document.getElementById('cta-contact-btn')
+  ];
+
+  // Open modal
+  contactButtons.forEach(btn => {
+    if (btn) {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        modal.classList.add('show');
+        document.body.style.overflow = 'hidden'; // Prevent background scrolling
+      });
+    }
+  });
+
+  // Close modal functions
+  const closeModal = () => {
+    modal.classList.remove('show');
+    document.body.style.overflow = ''; // Restore scrolling
+  };
+
+  if (modalCloseBtn) {
+    modalCloseBtn.addEventListener('click', closeModal);
+  }
+
+  // Close when clicking outside the modal content
+  if (modal) {
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        closeModal();
+      }
+    });
+  }
+
+  // Close on Escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal.classList.contains('show')) {
+      closeModal();
+    }
+  });
+
 });
 
 // ===== Hero constellation network background =====
